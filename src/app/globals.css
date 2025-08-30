@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Override dark mode to ensure light theme */
 @media (prefers-color-scheme: dark) {

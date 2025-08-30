@@ -8,11 +8,15 @@ import { Book } from '../types';
 interface BookCardProps {
   book: Book;
   onAddToCart?: (bookId: string) => void;
+    index?: number; 
+      isFeatured?: boolean; // جديد
+  
 }
 
-const BookCard: React.FC<BookCardProps> = ({ book, onAddToCart }) => {
+const BookCard: React.FC<BookCardProps> = ({ book, onAddToCart , index,isFeatured }) => {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const animationClass = isFeatured ? 'animate-fadeInScale' : 'animate-fadeInUp';
 
   // Function to render star ratings
   const renderStars = (rating: number) => {
@@ -82,7 +86,10 @@ const BookCard: React.FC<BookCardProps> = ({ book, onAddToCart }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
+<div   className={`bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200 ${
+        animationClass
+      }`}
+style={{ animationDelay: index ? `${index * 0.1}s` : '0s' }}>
       {/* Book Cover - Clickable */}
       <Link href={`/book/${book.id}`} className="block cursor-pointer">
         <div className="relative h-64 w-full bg-gray-200 flex items-center justify-center hover:bg-gray-300 transition-colors duration-200">
